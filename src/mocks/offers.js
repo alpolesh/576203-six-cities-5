@@ -15,7 +15,8 @@ const offers = [
       avatar: `img/avatar01.jpg`,
       name: `John`,
       super: true,
-    }
+    },
+    index: 0,
   },
   {
     photos: [`img/room2-1.jpg`, `img/room2-2.jpg`, `img/room2-3.jpg`, `img/room2-4.jpg`, `img/room2-5.jpg`, `img/room2-6.jpg`],
@@ -33,7 +34,8 @@ const offers = [
       avatar: `img/avatar02.jpg`,
       name: `Nelly`,
       super: true,
-    }
+    },
+    index: 1,
   },
 ];
 

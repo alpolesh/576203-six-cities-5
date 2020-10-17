@@ -1,11 +1,11 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 import Proptypes from "prop-types";
 
 const OfferCard = (props) => {
   const {offer} = props;
 
   return (
-
     <article className="cities__place-card place-card">
       {offer.premium ? (
         <div className="place-card__mark">
@@ -14,9 +14,11 @@ const OfferCard = (props) => {
       ) : ``
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src={offer.photos[0]} width="260" height="200" alt="Place image" />
-        </a>
+        <Link to={`/offer/${offer.index}`}>
+          <a>
+            <img className="place-card__image" src={offer.photos[0]} width="260" height="200" alt="Place image" />
+          </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -33,12 +35,14 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: offer.rating + `%`}}></span>
+            <span style={{width: (offer.rating * 20) + `%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.titel}</a>
+          <Link to={`/offer/${offer.index}`}>
+            <a>{offer.titel}</a>
+          </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
@@ -53,9 +57,9 @@ OfferCard.propTypes = {
     price: Proptypes.number.isRequired,
     titel: Proptypes.string.isRequired,
     type: Proptypes.string.isRequired,
-    rating: Proptypes.number.isRequired
-  }
-  )
+    rating: Proptypes.number.isRequired,
+    index: Proptypes.number.isRequired
+  }),
 };
 
 export default OfferCard;

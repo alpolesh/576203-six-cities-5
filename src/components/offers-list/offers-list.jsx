@@ -29,6 +29,7 @@ class OffersList extends PureComponent {
               key={`${i}-${offer.titel}`}
               offer={offer}
               onMouseOver={this.handleMouseOver(offer)}
+              index={i}
             />
           ))
         }
