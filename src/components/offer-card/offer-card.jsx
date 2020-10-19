@@ -1,23 +1,20 @@
 import React from "react";
 import {Link} from 'react-router-dom';
-import Proptypes from "prop-types";
+import Proptypes, {func} from "prop-types";
 
 const OfferCard = (props) => {
-  const {offer} = props;
+  const {offer, handleMouseOver} = props;
 
   return (
-    <article className="cities__place-card place-card">
-      {offer.premium ? (
+    <article className="cities__place-card place-card" onMouseOver={() => handleMouseOver(offer)}>
+      {offer.premium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
-      ) : ``
-      }
+      )}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${offer.index}`}>
-          <a>
-            <img className="place-card__image" src={offer.photos[0]} width="260" height="200" alt="Place image" />
-          </a>
+          <img className="place-card__image" src={offer.photos[0]} width="260" height="200" alt="Place image" />
         </Link>
       </div>
       <div className="place-card__info">
@@ -41,7 +38,7 @@ const OfferCard = (props) => {
         </div>
         <h2 className="place-card__name">
           <Link to={`/offer/${offer.index}`}>
-            <a>{offer.titel}</a>
+            {offer.titel}
           </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
@@ -60,6 +57,7 @@ OfferCard.propTypes = {
     rating: Proptypes.number.isRequired,
     index: Proptypes.number.isRequired
   }),
+  handleMouseOver: func,
 };
 
 export default OfferCard;

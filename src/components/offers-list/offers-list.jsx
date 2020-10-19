@@ -28,7 +28,7 @@ class OffersList extends PureComponent {
             <OfferCard
               key={`${i}-${offer.titel}`}
               offer={offer}
-              onMouseOver={this.handleMouseOver(offer)}
+              handleMouseOver={this.handleMouseOver}
               index={i}
             />
           ))

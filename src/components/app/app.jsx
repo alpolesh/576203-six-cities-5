@@ -14,11 +14,10 @@ const App = (props) => {
       <Switch>
         <Route exact
           path="/"
-          render={({history}) => (
+          render={() => (
             <MainPage
               rentCount={rentCount}
               offers={offers}
-              onEmailClick={() => history.push(`/favorites`)}
             />
           )}
         >

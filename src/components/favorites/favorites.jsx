@@ -10,21 +10,17 @@ const Favorites = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to='/'>
-                <a className="header__logo-link" href="main.html">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
+              <Link to='/' className="header__logo-link">
+                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link to='/favorites'>
-                    <a className="header__nav-link header__nav-link--profile">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
+                  <Link to='/favorites' className="header__nav-link header__nav-link--profile">
+                    <div className="header__avatar-wrapper user__avatar-wrapper">
+                    </div>
+                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                   </Link>
                 </li>
               </ul>
@@ -50,9 +46,7 @@ const Favorites = (props) => {
                   <article className="favorites__card place-card">
                     <div className="favorites__image-wrapper place-card__image-wrapper">
                       <Link to={`/offer/${offer.index}`}>
-                        <a href="#">
-                          <img className="place-card__image" src={offer.photos[0]} width="150" height="110" alt="Place image"/>
-                        </a>
+                        <img className="place-card__image" src={offer.photos[0]} width="150" height="110" alt="Place image"/>
                       </Link>
                     </div>
                     <div className="favorites__card-info place-card__info">
@@ -76,7 +70,7 @@ const Favorites = (props) => {
                       </div>
                       <h2 className="place-card__name">
                         <Link to={`/offer/${offer.index}`}>
-                          <a href="#">{offer.titel}</a>
+                          {offer.titel}
                         </Link>
                       </h2>
                       <p className="place-card__type">{offer.type}</p>
@@ -89,10 +83,8 @@ const Favorites = (props) => {
         </div>
       </main>
       <footer className="footer container">
-        <Link to='/'>
-          <a className="footer__logo-link">
-            <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-          </a>
+        <Link to='/' className="footer__logo-link">
+          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
         </Link>
       </footer>
     </div>
