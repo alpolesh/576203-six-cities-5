@@ -7,22 +7,38 @@ import Room from "../room/room";
 import Proptypes from "prop-types";
 
 const App = (props) => {
-  const {rentCount} = props;
+  const {rentCount, offers, reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <MainPage rentCount={rentCount}/>
+        <Route exact
+          path="/"
+          render={() => (
+            <MainPage
+              rentCount={rentCount}
+              offers={offers}
+            />
+          )}
+        >
         </Route>
         <Route exact path="/login">
           <Login />
         </Route>
         <Route exact path="/favorites">
-          <Favorites />
+          <Favorites
+            offer={offers[0]}
+          />
         </Route>
-        <Route exact path="/offer/:id">
-          <Room />
+        <Route exact
+          path="/offer/:id"
+          render={(prop) => (
+            <Room
+              offer={offers[prop.match.params.id]}
+              reviews={reviews}
+            />
+          )}
+        >
         </Route>
       </Switch>
     </BrowserRouter>
@@ -30,8 +46,10 @@ const App = (props) => {
   );
 };
 
-App.proptypes = {
-  rentCount: Proptypes.number.isRequired
+App.propTypes = {
+  rentCount: Proptypes.number.isRequired,
+  offers: Proptypes.array.isRequired,
+  reviews: Proptypes.array.isRequired,
 };
 
 export default App;
