@@ -16,6 +16,10 @@ const offers = [
       name: `John`,
       super: true,
     },
+    coordinates: {
+      length: 52.3909553943508,
+      width: 4.85309666406198
+    },
     index: 0,
   },
   {
@@ -34,6 +38,10 @@ const offers = [
       avatar: `img/avatar02.jpg`,
       name: `Nelly`,
       super: true,
+    },
+    coordinates: {
+      length: 52.369553943508,
+      width: 4.85309666406198
     },
     index: 1,
   },
