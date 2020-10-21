@@ -101,7 +101,7 @@ const MainPage = (props) => {
               <OffersList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"><Map></Map> </section>
+              <section className="cities__map map"><Map offers={offers}></Map> </section>
             </div>
           </div>
         </div>

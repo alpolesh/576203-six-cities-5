@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import Proptypes from "prop-types";
 import 'leaflet/dist/leaflet.css';
 import leaflet from "leaflet";
 
@@ -22,16 +23,27 @@ class Map extends PureComponent {
     });
     map.setView(city, zoom);
     leaflet
-  .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-    attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-  })
-  .addTo(map);
+      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+      })
+      .addTo(map);
+    const offerCords = this.props.offers.map((offer) => offer.coordinates);
+    offerCords.forEach((offer) => {
+      leaflet
+       .marker(offer, {icon})
+       .addTo(map);
+    });
   }
 
   render() {
     return (
-      <div id="map"></div>
+      <div id="map" style={{height: 100 + `%`}}></div>
     );
   }
 }
+
+Map.propTypes = {
+  offers: Proptypes.arrayOf(Proptypes.array).isRequired,
+};
+
 export default Map;
