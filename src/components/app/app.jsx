@@ -7,7 +7,7 @@ import Room from "../room/room";
 import Proptypes from "prop-types";
 
 const App = (props) => {
-  const {rentCount, offers, reviews} = props;
+  const {rentCount, offers, reviews, cities} = props;
 
   return (
     <BrowserRouter>
@@ -18,6 +18,7 @@ const App = (props) => {
             <MainPage
               rentCount={rentCount}
               offers={offers}
+              cities={cities}
             />
           )}
         >
@@ -50,6 +51,7 @@ App.propTypes = {
   rentCount: Proptypes.number.isRequired,
   offers: Proptypes.array.isRequired,
   reviews: Proptypes.array.isRequired,
+  cities: Proptypes.arrayOf(Proptypes.string).isRequired,
 };
 
 export default App;

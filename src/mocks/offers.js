@@ -18,6 +18,7 @@ const offers = [
     },
     coordinates: [52.3909553943508, 4.85309666406198],
     index: 0,
+    city: `Amsterdam`
   },
   {
     photos: [`img/room2-1.jpg`, `img/room2-2.jpg`, `img/room2-3.jpg`, `img/room2-4.jpg`, `img/room2-5.jpg`, `img/room2-6.jpg`],
@@ -38,6 +39,7 @@ const offers = [
     },
     coordinates: [52.369553943508, 4.85309666406198],
     index: 1,
+    city: `Amsterdam`,
   },
 ];
 
