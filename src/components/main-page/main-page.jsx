@@ -1,12 +1,14 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 import Proptypes from "prop-types";
+import {connect} from "react-redux";
+// import {ActionCreator} from "../../store/action";
 import OffersList from "../offers-list/offers-list";
 import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
 
 const MainPage = (props) => {
-  const {rentCount, offers, cities} = props;
+  const {offers, cities, city} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -51,7 +53,7 @@ const MainPage = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{rentCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} {offers.length === 1 ? `place` : `places`} to stay in {city}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -75,7 +77,7 @@ const MainPage = (props) => {
                 </select> */}
 
               </form>
-              <OffersList offers={offers}/>
+              <OffersList />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"><Map offers={offers}></Map> </section>
@@ -91,6 +93,14 @@ MainPage.propTypes = {
   rentCount: Proptypes.number.isRequired,
   offers: Proptypes.array.isRequired,
   cities: Proptypes.array.isRequired,
+  city: Proptypes.string.isRequired,
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  city: state.city,
+});
+
+
+export {MainPage};
+export default connect(mapStateToProps)(MainPage);

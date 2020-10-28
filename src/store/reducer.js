@@ -1,10 +1,9 @@
-import offers from "../mocks/offers";
 import {extend} from "../utils";
 import {ActionType} from "./action";
 
 const initialState = {
   city: `Amsterdam`,
-  offers,
+  offers: [],
 };
 
 const reducer = (state = initialState, action) => {
