@@ -15,23 +15,39 @@ class Map extends PureComponent {
       iconSize: [30, 30]
     });
     const zoom = 12;
-    const map = leaflet.map(`map`, {
+    this.map = leaflet.map(`map`, {
       center: city,
       zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(city, zoom);
+    this.map.setView(city, zoom);
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(map);
+      .addTo(this.map);
+    this.markers = [];
     const offerCords = this.props.offers.map((offer) => offer.coordinates);
     offerCords.forEach((offer) => {
-      leaflet
+      this.markers.push(leaflet
        .marker(offer, {icon})
-       .addTo(map);
+       .addTo(this.map));
+    });
+  }
+
+  componentDidUpdate() {
+    this.markers.map((marker) => this.map.removeLayer(marker));
+    this.map.removeLayer(this.markers.pop());
+    const icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 30]
+    });
+    const offerCords = this.props.offers.map((offer) => offer.coordinates);
+    offerCords.forEach((offer) => {
+      this.markers.push(leaflet
+       .marker(offer, {icon})
+       .addTo(this.map));
     });
   }
 
@@ -43,7 +59,7 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  offers: Proptypes.arrayOf(Proptypes.array).isRequired,
+  offers: Proptypes.arrayOf(Proptypes.object).isRequired,
 };
 
 export default Map;
