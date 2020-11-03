@@ -9,7 +9,7 @@ import Room from "../room/room";
 import Proptypes from "prop-types";
 
 const App = (props) => {
-  const {rentCount, offers, getOffers, reviews, cities, city} = props;
+  const {offers, getOffers, reviews, cities, city} = props;
   getOffers(city);
 
   return (
@@ -19,7 +19,6 @@ const App = (props) => {
           path="/"
           render={() => (
             <MainPage
-              rentCount={rentCount}
               cities={cities}
             />
           )}
@@ -50,7 +49,6 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  rentCount: Proptypes.number.isRequired,
   offers: Proptypes.array.isRequired,
   reviews: Proptypes.array.isRequired,
   cities: Proptypes.arrayOf(Proptypes.string).isRequired,
