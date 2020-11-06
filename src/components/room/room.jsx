@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import FormComment from "../form-comment/form-comment";
+import withFormComment from "../../hocs/with-form-comment/with-form-comment";
+
+const FormCommentWrapped = withFormComment(FormComment);
 
 const Room = (props) => {
   const {offer, reviews} = props;
@@ -135,7 +138,7 @@ const Room = (props) => {
                     </li>
                   ))}
                 </ul>
-                <FormComment />
+                <FormCommentWrapped />
               </section>
             </div>
           </div>

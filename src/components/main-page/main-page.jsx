@@ -2,10 +2,12 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import Proptypes from "prop-types";
 import {connect} from "react-redux";
-// import {ActionCreator} from "../../store/action";
 import OffersList from "../offers-list/offers-list";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
+
+const OffersListWrapped = withActiveItem(OffersList);
 
 const MainPage = (props) => {
   const {offers, cities, city} = props;
@@ -77,7 +79,7 @@ const MainPage = (props) => {
                 </select> */}
 
               </form>
-              <OffersList />
+              <OffersListWrapped />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"><Map offers={offers}></Map> </section>
@@ -90,7 +92,6 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  rentCount: Proptypes.number.isRequired,
   offers: Proptypes.array.isRequired,
   cities: Proptypes.array.isRequired,
   city: Proptypes.string.isRequired,
