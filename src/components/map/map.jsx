@@ -28,8 +28,15 @@ class Map extends PureComponent {
       })
       .addTo(this.map);
     this.markers = [];
-    const offerCords = this.props.offers.map((offer) => offer.coordinates);
-    offerCords.forEach((offer) => {
+    const offersCords = [];
+    let offerCords = [];
+    this.props.offers.forEach((offer) => {
+      offerCords.push(offer.city.location.latitude);
+      offerCords.push(offer.city.location.longitude);
+      offersCords.push(offerCords);
+      offerCords = [];
+    });
+    offersCords.forEach((offer) => {
       this.markers.push(leaflet
        .marker(offer, {icon})
        .addTo(this.map));
@@ -43,8 +50,15 @@ class Map extends PureComponent {
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
-    const offerCords = this.props.offers.map((offer) => offer.coordinates);
-    offerCords.forEach((offer) => {
+    const offersCords = [];
+    let offerCords = [];
+    this.props.offers.forEach((offer) => {
+      offerCords.push(offer.city.location.latitude);
+      offerCords.push(offer.city.location.longitude);
+      offersCords.push(offerCords);
+      offerCords = [];
+    });
+    offersCords.forEach((offer) => {
       this.markers.push(leaflet
        .marker(offer, {icon})
        .addTo(this.map));

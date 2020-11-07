@@ -29,7 +29,7 @@ const OffersList = (props) => {
             key={`${i}-${offer.titel}`}
             offer={offer}
             handleMouseOver={handleMouseOver}
-            index={i}
+            id={i}
           />
         ))
       }
@@ -40,6 +40,7 @@ const OffersList = (props) => {
 
 OffersList.propTypes = {
   offers: Proptypes.array.isRequired,
+  handleMouseOver: Proptypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

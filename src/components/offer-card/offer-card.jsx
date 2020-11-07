@@ -7,14 +7,14 @@ const OfferCard = (props) => {
 
   return (
     <article className="cities__place-card place-card" onMouseOver={() => handleMouseOver(offer)}>
-      {offer.premium && (
+      {offer.is_premium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/${offer.index}`}>
-          <img className="place-card__image" src={offer.photos[0]} width="260" height="200" alt="Place image" />
+        <Link to={`/offer/${offer.id}`}>
+          <img className="place-card__image" src={offer.images[0]} width="260" height="200" alt="Place image" />
         </Link>
       </div>
       <div className="place-card__info">
@@ -37,7 +37,7 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.index}`}>
+          <Link to={`/offer/${offer.id}`}>
             {offer.titel}
           </Link>
         </h2>
@@ -49,13 +49,13 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   offer: Proptypes.shape({
-    premium: Proptypes.bool.isRequired,
-    photos: Proptypes.array.isRequired,
-    price: Proptypes.number.isRequired,
-    titel: Proptypes.string.isRequired,
-    type: Proptypes.string.isRequired,
-    rating: Proptypes.number.isRequired,
-    index: Proptypes.number.isRequired
+    "is_premium": Proptypes.bool.isRequired,
+    "images": Proptypes.array.isRequired,
+    "price": Proptypes.number.isRequired,
+    "titel": Proptypes.string.isRequired,
+    "type": Proptypes.string.isRequired,
+    "rating": Proptypes.number.isRequired,
+    "id": Proptypes.number.isRequired
   }),
   handleMouseOver: func,
 };

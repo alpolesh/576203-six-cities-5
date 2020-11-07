@@ -1,5 +1,4 @@
 import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
 
 const withFormComment = (Component) => {
   class WithFormComment extends PureComponent {
@@ -7,8 +6,8 @@ const withFormComment = (Component) => {
       super(props);
 
       this.state = {
-        reviewText: ``,
-        stars: 0,
+        comment: ``,
+        rating: 0,
       };
 
       this.handleChangeText = this.handleChangeText.bind(this);
@@ -18,19 +17,19 @@ const withFormComment = (Component) => {
 
     handleChangeText(evt) {
       this.setState({
-        reviewText: evt.target.value
+        comment: evt.target.value
       });
     }
 
     handleChangeStars(evt) {
       this.setState({
-        stars: evt.target.value
+        rating: evt.target.value
       });
     }
 
     handleSubmit(evt) {
       evt.preventDefault();
-      console.log(`Review text:`, this.state.reviewText, `, Stars:`, this.state.stars);
+      console.log(`comment:`, this.state.comment, `, rating:`, this.state.rating);
       this.setState({
         reviewText: ``,
         stars: 0,
@@ -38,12 +37,9 @@ const withFormComment = (Component) => {
     }
 
     render() {
-      const {reviewText, stars} = this.state;
       return (
         <Component
           {...this.props}
-          reviewText={reviewText}
-          stars={stars}
           handleChangeText={this.handleChangeText}
           handleChangeStars={this.handleChangeStars}
           handleSubmit={this.handleSubmit}
