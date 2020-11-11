@@ -50,7 +50,7 @@ const Room = (props) => {
               )}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  {offer.titel}
+                  {offer.title}
                 </h1>
                 <button className="property__bookmark-button button" type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
@@ -224,7 +224,7 @@ Room.propTypes = {
     "is_premium": PropTypes.bool.isRequired,
     "images": PropTypes.array.isRequired,
     "price": PropTypes.number.isRequired,
-    "titel": PropTypes.string.isRequired,
+    "title": PropTypes.string.isRequired,
     "type": PropTypes.string.isRequired,
     "rating": PropTypes.number.isRequired,
     "bedrooms": PropTypes.number.isRequired,

@@ -4,21 +4,6 @@ import {connect} from "react-redux";
 import OfferCard from "../offer-card/offer-card";
 
 const OffersList = (props) => {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     activeOffer: {}
-  //   };
-  //   this.handleMouseOver = this.handleMouseOver.bind(this);
-  // }
-
-  // handleMouseOver(offerCard) {
-  //   this.setState(
-  //       {activeOffer: offerCard}
-  //   );
-  // }
-
   const {offers, handleMouseOver} = props;
 
   return (

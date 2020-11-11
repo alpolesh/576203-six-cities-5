@@ -4,11 +4,11 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
 const CitiesList = (props) => {
-  const {city, changeCity, getOffers, currentCity} = props;
+  const {city, changeCity, getOffers, currentCity, hotels} = props;
 
-  const onCityClick = (value) => {
-    changeCity(value);
-    getOffers(value);
+  const onCityClick = (town) => {
+    changeCity(town);
+    getOffers(town, hotels);
   };
 
   return (
@@ -37,14 +37,15 @@ CitiesList.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentCity: state.city,
+  hotels: state.hotels,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCity(value) {
     dispatch(ActionCreator.changeCity(value));
   },
-  getOffers(value) {
-    dispatch(ActionCreator.getOffers(value));
+  getOffers(city, hotels) {
+    dispatch(ActionCreator.getOffers(city, hotels));
   }
 });
 

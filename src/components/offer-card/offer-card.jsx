@@ -38,7 +38,7 @@ const OfferCard = (props) => {
         </div>
         <h2 className="place-card__name">
           <Link to={`/offer/${offer.id}`}>
-            {offer.titel}
+            {offer.title}
           </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
@@ -52,7 +52,7 @@ OfferCard.propTypes = {
     "is_premium": Proptypes.bool.isRequired,
     "images": Proptypes.array.isRequired,
     "price": Proptypes.number.isRequired,
-    "titel": Proptypes.string.isRequired,
+    "title": Proptypes.string.isRequired,
     "type": Proptypes.string.isRequired,
     "rating": Proptypes.number.isRequired,
     "id": Proptypes.number.isRequired

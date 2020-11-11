@@ -16,6 +16,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         offers: action.payload
       });
+    case ActionType.LOAD_HOTELS:
+      return extend(state, {
+        hotels: action.payload
+      });
     default:
       return state;
   }

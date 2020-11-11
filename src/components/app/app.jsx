@@ -9,8 +9,8 @@ import Room from "../room/room";
 import Proptypes from "prop-types";
 
 const App = (props) => {
-  const {offers, getOffers, reviews, cities, city} = props;
-  getOffers(city);
+  const {offers, getOffers, reviews, cities, city, hotels} = props;
+  getOffers(city, hotels);
 
   return (
     <BrowserRouter>
@@ -36,7 +36,7 @@ const App = (props) => {
           path="/offer/:id"
           render={(prop) => (
             <Room
-              offer={offers[prop.match.params.id]}
+              offer={hotels[prop.match.params.id - 1]}
               reviews={reviews}
             />
           )}
@@ -58,12 +58,13 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   city: state.city,
+  hotels: state.hotels,
 });
 
 const mapDispatchToProps = (dispatch) => ({
 
-  getOffers(value) {
-    dispatch(ActionCreator.getOffers(value));
+  getOffers(city, hotels) {
+    dispatch(ActionCreator.getOffers(city, hotels));
   }
 });
 

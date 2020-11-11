@@ -9,6 +9,7 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
+    console.log(`offers`, this.props);
     const city = [52.38333, 4.9];
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -36,6 +37,7 @@ class Map extends PureComponent {
       offersCords.push(offerCords);
       offerCords = [];
     });
+    console.log(offersCords);
     offersCords.forEach((offer) => {
       this.markers.push(leaflet
        .marker(offer, {icon})
