@@ -35,9 +35,9 @@ CitiesList.propTypes = {
   currentCity: Proptypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentCity: state.city,
-  hotels: state.hotels,
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  currentCity: PROCESS.city,
+  hotels: DATA.hotels,
 });
 
 const mapDispatchToProps = (dispatch) => ({

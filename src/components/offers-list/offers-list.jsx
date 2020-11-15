@@ -28,8 +28,8 @@ OffersList.propTypes = {
   handleMouseOver: Proptypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
+const mapStateToProps = ({DATA}) => ({
+  offers: DATA.offers,
 });
 
 export {OffersList};

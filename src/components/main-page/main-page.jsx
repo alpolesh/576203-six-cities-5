@@ -97,9 +97,9 @@ MainPage.propTypes = {
   city: Proptypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  city: state.city,
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  offers: DATA.offers,
+  city: PROCESS.city,
 });
 
 

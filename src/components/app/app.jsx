@@ -7,6 +7,7 @@ import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import Room from "../room/room";
 import Proptypes from "prop-types";
+import {getCity, getHotels} from "../../selectors";
 
 const App = (props) => {
   const {offers, getOffers, reviews, cities, city, hotels} = props;
@@ -54,15 +55,17 @@ App.propTypes = {
   cities: Proptypes.arrayOf(Proptypes.string).isRequired,
   getOffers: Proptypes.func.isRequired,
   city: Proptypes.string.isRequired,
+  hotels: Proptypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  city: state.city,
-  hotels: state.hotels,
-});
+const mapStateToProps = (state) => {
+  return {
+    city: getCity(state),
+    hotels: getHotels(state),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
-
   getOffers(city, hotels) {
     dispatch(ActionCreator.getOffers(city, hotels));
   }

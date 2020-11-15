@@ -9,7 +9,7 @@ import App from "./components/app/app";
 import offers from "./mocks/offers";
 import reviews from "./mocks/reviews";
 import cities from "./mocks/cities";
-import {reducer} from "./store/reducer";
+import rootReducer from "./store/reducers/root-reducer";
 import {ActionCreator} from "./store/action";
 import {fetchHotelsList} from "./store/api-actions";
 import {AuthorizationStatus} from "./const";
@@ -19,7 +19,7 @@ const api = createAPI(
 );
 
 const store = createStore(
-    reducer,
+    rootReducer,
     composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument(api))
     )
