@@ -2,6 +2,7 @@ import React from "react";
 import Proptypes from "prop-types";
 import {connect} from "react-redux";
 import OfferCard from "../offer-card/offer-card";
+import {getOffersFromHotels} from "../../selectors";
 
 const OffersList = (props) => {
   const {offers, handleMouseOver} = props;
@@ -11,7 +12,7 @@ const OffersList = (props) => {
       {
         offers.map((offer, i) => (
           <OfferCard
-            key={`${i}-${offer.titel}`}
+            key={`${i}-${offer.title}`}
             offer={offer}
             handleMouseOver={handleMouseOver}
             id={i}
@@ -28,8 +29,8 @@ OffersList.propTypes = {
   handleMouseOver: Proptypes.func.isRequired,
 };
 
-const mapStateToProps = ({DATA}) => ({
-  offers: DATA.offers,
+const mapStateToProps = (state) => ({
+  offers: getOffersFromHotels(state),
 });
 
 export {OffersList};

@@ -6,7 +6,6 @@ import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import App from "./components/app/app";
-import offers from "./mocks/offers";
 import reviews from "./mocks/reviews";
 import cities from "./mocks/cities";
 import rootReducer from "./store/reducers/root-reducer";
@@ -32,7 +31,6 @@ new Promise((resolve) => {
   ReactDOM.render(
       <Provider store={store}>
         <App
-          offers={offers}
           reviews={reviews}
           cities={cities}
         />,

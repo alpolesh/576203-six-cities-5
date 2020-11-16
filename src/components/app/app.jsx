@@ -1,17 +1,15 @@
 import React from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
 import MainPage from "../main-page/main-page";
 import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import Room from "../room/room";
 import Proptypes from "prop-types";
-import {getCity, getHotels} from "../../selectors";
+import {getHotels, getOffersFromHotels} from "../../selectors";
 
 const App = (props) => {
-  const {offers, getOffers, reviews, cities, city, hotels} = props;
-  getOffers(city, hotels);
+  const {offers, reviews, cities, hotels} = props;
 
   return (
     <BrowserRouter>
@@ -53,24 +51,17 @@ App.propTypes = {
   offers: Proptypes.array.isRequired,
   reviews: Proptypes.array.isRequired,
   cities: Proptypes.arrayOf(Proptypes.string).isRequired,
-  getOffers: Proptypes.func.isRequired,
-  city: Proptypes.string.isRequired,
   hotels: Proptypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    city: getCity(state),
     hotels: getHotels(state),
+    offers: getOffersFromHotels(state),
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  getOffers(city, hotels) {
-    dispatch(ActionCreator.getOffers(city, hotels));
-  }
-});
 
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
 

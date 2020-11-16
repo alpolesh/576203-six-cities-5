@@ -2,13 +2,14 @@ import React from "react";
 import Proptypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
+import {getCity} from "../../selectors";
+
 
 const CitiesList = (props) => {
-  const {city, changeCity, getOffers, currentCity, hotels} = props;
+  const {city, changeCity, currentCity} = props;
 
   const onCityClick = (town) => {
     changeCity(town);
-    getOffers(town, hotels);
   };
 
   return (
@@ -31,22 +32,17 @@ const CitiesList = (props) => {
 CitiesList.propTypes = {
   city: Proptypes.string.isRequired,
   changeCity: Proptypes.func.isRequired,
-  getOffers: Proptypes.func.isRequired,
   currentCity: Proptypes.string.isRequired,
 };
 
-const mapStateToProps = ({DATA, PROCESS}) => ({
-  currentCity: PROCESS.city,
-  hotels: DATA.hotels,
+const mapStateToProps = (state) => ({
+  currentCity: getCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCity(value) {
     dispatch(ActionCreator.changeCity(value));
   },
-  getOffers(city, hotels) {
-    dispatch(ActionCreator.getOffers(city, hotels));
-  }
 });
 
 export {CitiesList};

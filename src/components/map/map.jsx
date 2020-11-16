@@ -27,7 +27,6 @@ class Map extends PureComponent {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this.map);
-    // console.log(this.map);
     this.markers = [];
     const offersCords = [];
     let offerCords = [];
@@ -48,7 +47,6 @@ class Map extends PureComponent {
   componentDidUpdate() {
     this.map.options.center = [this.props.offers[0].city.location.latitude, this.props.offers[0].city.location.longitude];
     this.map.setView(this.map.options.center, this.props.offers[0].city.location.zoom);
-    // console.log([this.props.offers[0].city.location.latitude, this.props.offers[0].city.location.longitude]);
     this.markers.map((marker) => this.map.removeLayer(marker));
     this.map.removeLayer(this.markers.pop());
     const icon = leaflet.icon({

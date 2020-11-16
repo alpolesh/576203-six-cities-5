@@ -9,7 +9,7 @@ export const getHotels = (state) => {
   return state[NameSpace.DATA].hotels;
 };
 
-export const getOffers = createSelector(
+export const getOffersFromHotels = createSelector(
     getCity,
     getHotels,
     (city, hotels) => {
