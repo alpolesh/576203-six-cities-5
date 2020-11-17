@@ -1,10 +1,13 @@
 import React from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import Reviews from "../reviews/reviews";
+import {getHotels} from "../../selectors";
 
 const Room = (props) => {
-  const {offer, reviews} = props;
+  const {paramsId, reviews, hotels} = props;
+  const offer = hotels.find((item) => item.id === Number(paramsId));
   return (
     <div className="page">
       <header className="header">
@@ -220,23 +223,16 @@ const Room = (props) => {
 };
 
 Room.propTypes = {
-  offer: PropTypes.shape({
-    "is_premium": PropTypes.bool.isRequired,
-    "images": PropTypes.array.isRequired,
-    "price": PropTypes.number.isRequired,
-    "title": PropTypes.string.isRequired,
-    "type": PropTypes.string.isRequired,
-    "rating": PropTypes.number.isRequired,
-    "bedrooms": PropTypes.number.isRequired,
-    "max_adults": PropTypes.number.isRequired,
-    "goods": PropTypes.array.isRequired,
-    "host": PropTypes.shape({
-      "avatar_url": PropTypes.string.isRequired,
-      "name": PropTypes.string.isRequired,
-    }),
-    "description": PropTypes.string.isRequired,
-  }).isRequired,
-  reviews: PropTypes.array.isRequired
+  hotels: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
+  paramsId: PropTypes.string.isRequired
 };
 
-export default Room;
+const mapStateToProps = (state) => {
+  return {
+    hotels: getHotels(state),
+  };
+};
+
+export {Room};
+export default connect(mapStateToProps)(Room);

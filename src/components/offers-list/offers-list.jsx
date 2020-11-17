@@ -15,7 +15,7 @@ const OffersList = (props) => {
             key={`${i}-${offer.title}`}
             offer={offer}
             handleMouseOver={handleMouseOver}
-            id={i}
+            id={offer.id}
           />
         ))
       }

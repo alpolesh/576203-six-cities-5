@@ -6,10 +6,10 @@ import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import Room from "../room/room";
 import Proptypes from "prop-types";
-import {getHotels, getOffersFromHotels} from "../../selectors";
+import {getOffersFromHotels} from "../../selectors";
 
 const App = (props) => {
-  const {offers, reviews, cities, hotels} = props;
+  const {offers, reviews, cities} = props;
 
   return (
     <BrowserRouter>
@@ -33,12 +33,14 @@ const App = (props) => {
         </Route>
         <Route exact
           path="/offer/:id"
-          render={(prop) => (
-            <Room
-              offer={hotels[prop.match.params.id - 1]}
-              reviews={reviews}
-            />
-          )}
+          render={(prop) => {
+            return (
+              <Room
+                paramsId={prop.match.params.id}
+                reviews={reviews}
+              />
+            );
+          }}
         >
         </Route>
       </Switch>
@@ -51,16 +53,13 @@ App.propTypes = {
   offers: Proptypes.array.isRequired,
   reviews: Proptypes.array.isRequired,
   cities: Proptypes.arrayOf(Proptypes.string).isRequired,
-  hotels: Proptypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    hotels: getHotels(state),
     offers: getOffersFromHotels(state),
   };
 };
-
 
 export {App};
 export default connect(mapStateToProps)(App);
