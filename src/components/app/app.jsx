@@ -1,16 +1,15 @@
 import React from "react";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
 import MainPage from "../main-page/main-page";
 import Login from "../login/login";
 import Favorites from "../favorites/favorites";
 import Room from "../room/room";
 import Proptypes from "prop-types";
+import {getOffersFromHotels} from "../../selectors";
 
 const App = (props) => {
-  const {offers, getOffers, reviews, cities, city} = props;
-  getOffers(city);
+  const {offers, reviews, cities} = props;
 
   return (
     <BrowserRouter>
@@ -34,12 +33,14 @@ const App = (props) => {
         </Route>
         <Route exact
           path="/offer/:id"
-          render={(prop) => (
-            <Room
-              offer={offers[prop.match.params.id]}
-              reviews={reviews}
-            />
-          )}
+          render={(prop) => {
+            return (
+              <Room
+                paramsId={prop.match.params.id}
+                reviews={reviews}
+              />
+            );
+          }}
         >
         </Route>
       </Switch>
@@ -52,21 +53,14 @@ App.propTypes = {
   offers: Proptypes.array.isRequired,
   reviews: Proptypes.array.isRequired,
   cities: Proptypes.arrayOf(Proptypes.string).isRequired,
-  getOffers: Proptypes.func.isRequired,
-  city: Proptypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  city: state.city,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-
-  getOffers(value) {
-    dispatch(ActionCreator.getOffers(value));
-  }
-});
+const mapStateToProps = (state) => {
+  return {
+    offers: getOffersFromHotels(state),
+  };
+};
 
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
 

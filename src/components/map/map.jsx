@@ -9,12 +9,12 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const city = [52.38333, 4.9];
+    const city = [this.props.offers[0].city.location.latitude, this.props.offers[0].city.location.longitude];
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
-    const zoom = 12;
+    const zoom = this.props.offers[0].city.location.zoom;
     this.map = leaflet.map(`map`, {
       center: city,
       zoom,
@@ -28,23 +28,40 @@ class Map extends PureComponent {
       })
       .addTo(this.map);
     this.markers = [];
-    const offerCords = this.props.offers.map((offer) => offer.coordinates);
-    offerCords.forEach((offer) => {
+    const offersCords = [];
+    let offerCords = [];
+    this.props.offers.forEach((offer) => {
+      offerCords.push(offer.location.latitude);
+      offerCords.push(offer.location.longitude);
+      offersCords.push(offerCords);
+      offerCords = [];
+    });
+    offersCords.forEach((offer) => {
       this.markers.push(leaflet
        .marker(offer, {icon})
        .addTo(this.map));
     });
+
   }
 
   componentDidUpdate() {
+    this.map.options.center = [this.props.offers[0].city.location.latitude, this.props.offers[0].city.location.longitude];
+    this.map.setView(this.map.options.center, this.props.offers[0].city.location.zoom);
     this.markers.map((marker) => this.map.removeLayer(marker));
     this.map.removeLayer(this.markers.pop());
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
-    const offerCords = this.props.offers.map((offer) => offer.coordinates);
-    offerCords.forEach((offer) => {
+    const offersCords = [];
+    let offerCords = [];
+    this.props.offers.forEach((offer) => {
+      offerCords.push(offer.location.latitude);
+      offerCords.push(offer.location.longitude);
+      offersCords.push(offerCords);
+      offerCords = [];
+    });
+    offersCords.forEach((offer) => {
       this.markers.push(leaflet
        .marker(offer, {icon})
        .addTo(this.map));

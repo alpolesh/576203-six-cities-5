@@ -1,13 +1,13 @@
 import React from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
-import FormComment from "../form-comment/form-comment";
-import withFormComment from "../../hocs/with-form-comment/with-form-comment";
-
-const FormCommentWrapped = withFormComment(FormComment);
+import Reviews from "../reviews/reviews";
+import {getHotels} from "../../selectors";
 
 const Room = (props) => {
-  const {offer, reviews} = props;
+  const {paramsId, reviews, hotels} = props;
+  const offer = hotels.find((item) => item.id === Number(paramsId));
   return (
     <div className="page">
       <header className="header">
@@ -37,7 +37,7 @@ const Room = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.photos.map((img) => (
+              {offer.images.map((img) => (
                 <div className="property__image-wrapper" key={img}>
                   <img className="property__image" src={img} alt="Photo studio"/>
                 </div>
@@ -46,14 +46,14 @@ const Room = (props) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer.premium && (
+              {offer.is_premium && (
                 <div className="property__mark">
                   <span>Premium</span>
                 </div>
               )}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  {offer.titel}
+                  {offer.title}
                 </h1>
                 <button className="property__bookmark-button button" type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
@@ -77,7 +77,7 @@ const Room = (props) => {
                   {offer.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {offer.maxAdults} adults
+                  Max {offer.max_adults} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -87,7 +87,7 @@ const Room = (props) => {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {offer.features.map((feature, i) => (
+                  {offer.goods.map((feature, i) => (
                     <li className="property__inside-item" key={`${feature}-${i}`}>
                       {feature}
                     </li>
@@ -98,10 +98,10 @@ const Room = (props) => {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={offer.owner.avatar} width="74" height="74" alt="Host avatar"/>
+                    <img className="property__avatar user__avatar" src={offer.host.avatar_url} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">
-                    {offer.owner.name}
+                    {offer.host.name}
                   </span>
                 </div>
                 <div className="property__description">
@@ -110,36 +110,7 @@ const Room = (props) => {
                   </p>
                 </div>
               </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ul className="reviews__list">
-                  {reviews.map((review, i) => (
-                    <li className="reviews__item" key={`${review.avatar}-${i}`}>
-                      <div className="reviews__user user">
-                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                          <img className="reviews__avatar user__avatar" src={review.avatar} width="54" height="54" alt="Reviews avatar"/>
-                        </div>
-                        <span className="reviews__user-name">
-                          {review.name}
-                        </span>
-                      </div>
-                      <div className="reviews__info">
-                        <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{width: review.points * 20 + `%`}}></span>
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div>
-                        <p className="reviews__text">
-                          {review.text}
-                        </p>
-                        <time className="reviews__time" dateTime="2019-04-24">{review.date}</time>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                <FormCommentWrapped />
-              </section>
+              <Reviews reviews={reviews} />
             </div>
           </div>
           <section className="property__map map"></section>
@@ -252,29 +223,16 @@ const Room = (props) => {
 };
 
 Room.propTypes = {
-  offer: PropTypes.shape({
-    premium: PropTypes.bool.isRequired,
-    photos: PropTypes.array.isRequired,
-    price: PropTypes.number.isRequired,
-    titel: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    features: PropTypes.array.isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-    description: PropTypes.string.isRequired,
-  }).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    avatar: PropTypes.string.isRequired,
-    points: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  })).isRequired
+  hotels: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
+  paramsId: PropTypes.string.isRequired
 };
 
-export default Room;
+const mapStateToProps = (state) => {
+  return {
+    hotels: getHotels(state),
+  };
+};
+
+export {Room};
+export default connect(mapStateToProps)(Room);

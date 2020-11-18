@@ -45,8 +45,8 @@ const Favorites = (props) => {
                 <div className="favorites__places">
                   <article className="favorites__card place-card">
                     <div className="favorites__image-wrapper place-card__image-wrapper">
-                      <Link to={`/offer/${offer.index}`}>
-                        <img className="place-card__image" src={offer.photos[0]} width="150" height="110" alt="Place image"/>
+                      <Link to={`/offer/${offer.id}`}>
+                        <img className="place-card__image" src={offer.images[0]} width="150" height="110" alt="Place image"/>
                       </Link>
                     </div>
                     <div className="favorites__card-info place-card__info">
@@ -69,8 +69,8 @@ const Favorites = (props) => {
                         </div>
                       </div>
                       <h2 className="place-card__name">
-                        <Link to={`/offer/${offer.index}`}>
-                          {offer.titel}
+                        <Link to={`/offer/${offer.id}`}>
+                          {offer.title}
                         </Link>
                       </h2>
                       <p className="place-card__type">{offer.type}</p>
@@ -93,13 +93,12 @@ const Favorites = (props) => {
 
 Favorites.propTypes = {
   offer: Proptypes.shape({
-    premium: Proptypes.bool.isRequired,
-    photos: Proptypes.array.isRequired,
+    images: Proptypes.array.isRequired,
     price: Proptypes.number.isRequired,
-    titel: Proptypes.string.isRequired,
+    title: Proptypes.string.isRequired,
     type: Proptypes.string.isRequired,
     rating: Proptypes.number.isRequired,
-    index: Proptypes.number.isRequired
+    id: Proptypes.number.isRequired
   }
   )
 };

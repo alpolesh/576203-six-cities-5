@@ -2,23 +2,9 @@ import React from "react";
 import Proptypes from "prop-types";
 import {connect} from "react-redux";
 import OfferCard from "../offer-card/offer-card";
+import {getOffersFromHotels} from "../../selectors";
 
 const OffersList = (props) => {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     activeOffer: {}
-  //   };
-  //   this.handleMouseOver = this.handleMouseOver.bind(this);
-  // }
-
-  // handleMouseOver(offerCard) {
-  //   this.setState(
-  //       {activeOffer: offerCard}
-  //   );
-  // }
-
   const {offers, handleMouseOver} = props;
 
   return (
@@ -26,10 +12,10 @@ const OffersList = (props) => {
       {
         offers.map((offer, i) => (
           <OfferCard
-            key={`${i}-${offer.titel}`}
+            key={`${i}-${offer.title}`}
             offer={offer}
             handleMouseOver={handleMouseOver}
-            index={i}
+            id={offer.id}
           />
         ))
       }
@@ -40,10 +26,11 @@ const OffersList = (props) => {
 
 OffersList.propTypes = {
   offers: Proptypes.array.isRequired,
+  handleMouseOver: Proptypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  offers: getOffersFromHotels(state),
 });
 
 export {OffersList};

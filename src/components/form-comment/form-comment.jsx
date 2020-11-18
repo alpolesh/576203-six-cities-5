@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const FormComment = (props) => {
   const {handleChangeText, handleChangeStars, handleSubmit} = props;
@@ -101,5 +102,10 @@ const FormComment = (props) => {
   );
 };
 
+FormComment.propTypes = {
+  handleChangeText: PropTypes.func.isRequired,
+  handleChangeStars: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default FormComment;
