@@ -16,3 +16,7 @@ export const getOffersFromHotels = createSelector(
       return hotels.filter((item) => item.city.name === city);
     }
 );
+
+export const getAuthorisationStatus = (state) => {
+  return state[NameSpace.USER].authorizationStatus;
+};

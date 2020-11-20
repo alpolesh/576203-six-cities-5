@@ -6,12 +6,29 @@ import OffersList from "../offers-list/offers-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
-import {getCity, getOffersFromHotels} from "../../selectors";
+import {getCity, getOffersFromHotels, getAuthorisationStatus} from "../../selectors";
 
 const OffersListWrapped = withActiveItem(OffersList);
 
 const MainPage = (props) => {
-  const {offers, cities, city} = props;
+  const {offers, cities, city, authorisationStatus} = props;
+
+  const navLinkProfile = (authStatus) => {
+    if (authStatus === `NO_AUTH`) {
+      return (
+        <Link to='/login' className="header__nav-link header__nav-link--profile">
+          <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+          <span className="header__user-name user__name">Sign in</span>
+        </Link>
+      );
+    }
+    return (
+      <Link to='/favorites' className="header__nav-link header__nav-link--profile">
+        <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+        <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+      </Link>
+    );
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -26,11 +43,7 @@ const MainPage = (props) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link to='/favorites' className="header__nav-link header__nav-link--profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </Link>
+                  {navLinkProfile(authorisationStatus)}
                 </li>
               </ul>
             </nav>
@@ -96,11 +109,13 @@ MainPage.propTypes = {
   offers: Proptypes.array.isRequired,
   cities: Proptypes.array.isRequired,
   city: Proptypes.string.isRequired,
+  authorisationStatus: Proptypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: getCity(state),
   offers: getOffersFromHotels(state),
+  authorisationStatus: getAuthorisationStatus(state),
 });
 
 

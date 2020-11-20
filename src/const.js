@@ -7,3 +7,4 @@ export const APIRoute = {
   HOTELS: `/hotels`,
   LOGIN: `/login`,
 };
+
