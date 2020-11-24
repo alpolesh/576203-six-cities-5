@@ -3,6 +3,7 @@ export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOAD_HOTELS: `LOAD_HOTELS`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
 export const ActionCreator = {

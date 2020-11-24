@@ -1,5 +1,5 @@
 import React, {PureComponent, createRef} from "react";
-import Proptypes from "prop-types";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../store/api-actions";
 import {Link} from 'react-router-dom';
@@ -99,7 +99,7 @@ class Login extends PureComponent {
 }
 
 Login.propTypes = {
-  onSubmit: Proptypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

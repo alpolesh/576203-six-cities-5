@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import MainPage from "../main-page/main-page";
 import Login from "../login/login";
@@ -8,12 +8,13 @@ import Room from "../room/room";
 import PrivateRoute from "../private-route/private-route";
 import Proptypes from "prop-types";
 import {getOffersFromHotels} from "../../selectors";
+import browserHistory from "../../browser-history";
 
 const App = (props) => {
   const {offers, reviews, cities} = props;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact
           path="/"
